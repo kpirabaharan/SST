@@ -1,6 +1,5 @@
 import { SSTConfig } from 'sst';
-import { NextjsSite } from 'sst/constructs';
-import { Bucket } from 'sst/constructs';
+import { NextjsSite, Bucket, Cron } from 'sst/constructs';
 
 export default {
   config(_input) {
@@ -22,6 +21,16 @@ export default {
             allowedMethods: ['GET', 'PUT', 'POST', 'DELETE', 'HEAD'],
           },
         ],
+      });
+
+      new Cron(stack, 'cron', {
+        schedule: 'rate(1 day)',
+        job: {
+          function: {
+            bind: [bucket],
+            handler: 'functions/delete.handler',
+          },
+        },
       });
 
       const site = new NextjsSite(stack, 'site', { bind: [bucket] });

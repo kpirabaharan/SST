@@ -22,16 +22,6 @@ export default {
         ],
       });
 
-      new Cron(stack, 'cron', {
-        schedule: 'rate(1 day)',
-        job: {
-          function: {
-            bind: [bucket],
-            handler: 'functions/delete.handler',
-          },
-        },
-      });
-
       const site = new NextjsSite(stack, 'site', { bind: [bucket] });
 
       stack.addOutputs({

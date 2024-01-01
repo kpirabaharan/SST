@@ -43,8 +43,7 @@ const onSubmit = async (e: FormData) => {
 
 const Home = async () => {
   return (
-    <main>
-      <h1>Main</h1>
+    <main className='flex flex-col items-center justify-center w-full h-screen'>
       <form action={onSubmit}>
         <input name='file' type='file' accept='image/png, image/jpeg' />
         <button type='submit'>Upload</button>

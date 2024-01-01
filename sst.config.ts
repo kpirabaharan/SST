@@ -12,10 +12,9 @@ export default {
     app.stack(function Site({ stack }) {
       // Create a new S3 bucket
       const bucket = new Bucket(stack, 'public', {
-        name: 'kpirabaharan-sst-tutorial-bucket',
         cors: [
           {
-            maxAge: '3000 second',
+            maxAge: '60 second',
             allowedOrigins: ['*'],
             allowedHeaders: ['*'],
             allowedMethods: ['GET', 'PUT', 'POST', 'DELETE', 'HEAD'],
